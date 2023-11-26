@@ -11,7 +11,7 @@ export class DuplicationValidationService {
      
         
       if(!isEdit) {
-            const isValid = control.value != "" ? !this.isDuplication(control.parent as FormGroup): true;
+            const isValid = !!control.value ? !this.isDuplication(control.parent as FormGroup): true;
             return isValid ? null : { duplication: true };
         } else {
           const parent = control.parent as FormGroup;
@@ -25,7 +25,7 @@ export class DuplicationValidationService {
               || customer.Lastname != parent?.controls.Lastname.value
             )
           ) {
-            const isValid = control.value != "" ? !this.isDuplication(control.parent as FormGroup): true;
+            const isValid = !!control.value ? !this.isDuplication(control.parent as FormGroup): true;
             return isValid ? null : { duplication: true };
           } 
           

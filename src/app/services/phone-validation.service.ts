@@ -8,8 +8,7 @@ export class PhoneValidationService {
   validatePhoneNumber(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const phoneNumberRegex = /^(\+989|09)\d{9}$/; // Adjust the regex based on your requirements
-      const isValid = control.value!= '' ? phoneNumberRegex.test(control.value) : true;
-
+      const isValid = !!control.value ? phoneNumberRegex.test(control.value) : true;
       return isValid ? null : { invalidPhoneNumber: true };
     };
   }

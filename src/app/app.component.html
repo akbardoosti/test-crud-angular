@@ -14,7 +14,7 @@
         formControlName="Firstname" 
         [(ngModel)]="customer.Firstname"
         />
-      <div class="cut"></div>
+      <!-- <div class="cut"></div> -->
       <label for="firstname" class="placeholder">First name</label>
       <div
         *ngIf="customerForm.controls['Firstname'].invalid && (customerForm.controls['Firstname'].dirty || customerForm.controls['Firstname'].touched)" 
@@ -42,7 +42,7 @@
         [(ngModel)]="customer.Lastname"
         [autocomplete]="'off'"
         />
-      <div class="cut"></div>
+      <!-- <div class="cut"></div> -->
       <label for="lastname" class="placeholder">Last name</label>
       <div
         *ngIf="customerForm.controls['Lastname'].invalid && (customerForm.controls['Lastname'].dirty || customerForm.controls['Lastname'].touched)" 
@@ -70,7 +70,7 @@
         [(ngModel)]="customer.Email"
         [autocomplete]="'off'"
         />
-      <div class="cut"></div>
+      <!-- <div class="cut"></div> -->
       <label for="email" class="placeholder">Email</label>
       <div
         *ngIf="customerForm.controls['Email'].invalid && (customerForm.controls['Email'].dirty || customerForm.controls['Email'].touched)" 
@@ -103,7 +103,7 @@
         [(ngModel)]="customer.PhoneNumber"
         [autocomplete]="'off'"
         />
-      <div class="cut"></div>
+      <!-- <div class="cut"></div> -->
       <label for="phone_number" class="placeholder">Phone number</label>
       <div
         *ngIf="customerForm.controls['PhoneNumber'].invalid && (customerForm.controls['PhoneNumber'].dirty || customerForm.controls['PhoneNumber'].touched)" 
@@ -117,7 +117,7 @@
         <div 
           *ngIf="customerForm.controls['PhoneNumber'].errors?.invalidPhoneNumber"
           >
-          Phone number is invalid
+          Phone number must start with 09 or +989
         </div>
         
       </div>
@@ -132,7 +132,7 @@
         [autocomplete]="'off'"
         [(ngModel)]="customer.BankAccountNumber"
         />
-      <div class="cut"></div>
+      <!-- <div class="cut"></div> -->
       <label for="account_number" class="placeholder">Bank account number</label>
       <div
         *ngIf="customerForm.controls['BankAccountNumber'].invalid && (customerForm.controls['BankAccountNumber'].dirty || customerForm.controls['BankAccountNumber'].touched)" 
@@ -146,7 +146,7 @@
         <div 
           *ngIf="customerForm.controls['BankAccountNumber'].errors?.invalidAccountNumber"
           >
-          Account number is invalid
+          Account number must be at least 9 digits
         </div>
       </div>
     </div>
@@ -160,7 +160,7 @@
         [(ngModel)]="customer.DateOfBirth"
         [autocomplete]="'off'"
         />
-      <div class="cut"></div>
+      <!-- <div class="cut"></div> -->
       <label for="account_number" class="placeholder">
         Birthdate
       </label>

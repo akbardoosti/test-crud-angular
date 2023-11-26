@@ -10,7 +10,7 @@ export class EmailValidationService {
     return (control: AbstractControl): ValidationErrors | null => {
       const emailRegxp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; // Adjust the regex based on your requirements
       const isValid = 
-        control.value!= '' ?emailRegxp.test(control.value):true;
+        !!control.value ?emailRegxp.test(control.value):true;
       
       return isValid ? null : { invalidEmail: true };
     };
@@ -26,7 +26,7 @@ export class EmailValidationService {
           )
         ) {
             const isValid = 
-              control.value!= '' ? this.isUnique(control as FormControl) : true;
+              !!control.value? this.isUnique(control as FormControl) : true;
             
             return isValid ? null : { duplication: true };
         }

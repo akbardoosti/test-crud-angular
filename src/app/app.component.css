@@ -19,7 +19,7 @@ body {
     box-sizing: border-box;
     height: fit-content;
     padding: 20px;
-    width: 500px;
+    width: 620px;
     display: flex;
     flex-flow: row wrap;
     gap: 0.5rem;
@@ -104,7 +104,7 @@ body {
   
   .input:focus ~ .placeholder,
   .input:not(:placeholder-shown) ~ .placeholder {
-    transform: translateY(-30px) translateX(10px) scale(0.75);
+    transform: translateY(-33px) translateX(-12px) scale(0.85);
   }
   
   .input:not(:placeholder-shown) ~ .placeholder {

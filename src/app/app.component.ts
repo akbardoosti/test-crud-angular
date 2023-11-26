@@ -143,6 +143,7 @@ export class AppComponent implements OnInit {
       };
       this.changeControllers(false);
       this.editFlag = false;
+      this.customerForm.reset();
     } else {
       alert('this customer is duplicated');
     }
