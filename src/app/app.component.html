@@ -1,0 +1,176 @@
+
+
+
+<div class="form" [formGroup]="customerForm" >
+  <div class="title">Welcome</div>
+  <div class="subtitle">Let's create your account!</div>
+  <div class="input-container ic1">
+    <input 
+      id="firstname" 
+      class="input" 
+      type="text" 
+      placeholder=" " 
+      formControlName="Firstname" 
+      [(ngModel)]="customer.Firstname"
+      />
+    <div class="cut"></div>
+    <label for="firstname" class="placeholder">First name</label>
+    <div
+      *ngIf="customerForm.controls['Firstname'].invalid && (customerForm.controls['Firstname'].dirty || customerForm.controls['Firstname'].touched)" 
+      class="text-warning"
+      >
+      <div 
+        *ngIf="customerForm.controls['Firstname'].errors?.required"
+        >
+        First name is reuired
+      </div>
+      <div 
+        *ngIf="customerForm.controls['Firstname'].errors?.duplication"
+        >
+        Customer is duplicated
+      </div>
+    </div>
+  </div>
+  <div class="input-container ic1">
+    <input 
+      id="lastname" 
+      class="input" 
+      type="text" 
+      placeholder=" " 
+      formControlName="Lastname" 
+      [(ngModel)]="customer.Lastname"
+      />
+    <div class="cut"></div>
+    <label for="lastname" class="placeholder">Last name</label>
+    <div
+      *ngIf="customerForm.controls['Lastname'].invalid && (customerForm.controls['Lastname'].dirty || customerForm.controls['Lastname'].touched)" 
+      class="text-warning"
+      >
+      <div 
+        *ngIf="customerForm.controls['Lastname'].errors?.required"
+        >
+        Last name is reuired
+      </div>
+      <div 
+        *ngIf="customerForm.controls['Lastname'].errors?.duplication"
+        >
+        Customer is duplicated
+      </div>
+    </div>
+  </div>
+  <div class="input-container ic1">
+    <input 
+      id="email" 
+      class="input" 
+      type="email" 
+      placeholder=" " 
+      formControlName="Email" 
+      [(ngModel)]="customer.Email"
+      />
+    <div class="cut"></div>
+    <label for="email" class="placeholder">Email</label>
+    <div
+      *ngIf="customerForm.controls['Email'].invalid && (customerForm.controls['Email'].dirty || customerForm.controls['Email'].touched)" 
+      class="text-warning"
+      >
+      <div 
+        *ngIf="customerForm.controls['Email'].errors?.required"
+        >
+        Email is reuired
+      </div>
+      <div 
+        *ngIf="customerForm.controls['Email'].errors?.invalidEmail"
+        >
+        Email is not valid
+      </div>
+    </div>
+  </div>
+  <div class="input-container ic1">
+    <input 
+      id="phone_number" 
+      class="input" 
+      type="text" 
+      placeholder=" " 
+      formControlName="PhoneNumber" 
+      [(ngModel)]="customer.PhoneNumber"
+      />
+    <div class="cut"></div>
+    <label for="phone_number" class="placeholder">Phone number</label>
+    <div
+      *ngIf="customerForm.controls['PhoneNumber'].invalid && (customerForm.controls['PhoneNumber'].dirty || customerForm.controls['PhoneNumber'].touched)" 
+      class="text-warning"
+      >
+      <div 
+        *ngIf="customerForm.controls['PhoneNumber'].errors?.required"
+        >
+        Phone number is reuired
+      </div>
+      <div 
+        *ngIf="customerForm.controls['PhoneNumber'].errors?.invalidPhoneNumber"
+        >
+        Phone number is invalid
+      </div>
+      
+    </div>
+  </div>
+  <div class="input-container ic1">
+    <input 
+      id="account_number" 
+      class="input" 
+      type="text" 
+      placeholder=" " 
+      formControlName="BankAccountNumber" 
+      [(ngModel)]="customer.BankAccountNumber"
+      />
+    <div class="cut"></div>
+    <label for="account_number" class="placeholder">Bank account number</label>
+    <div
+      *ngIf="customerForm.controls['BankAccountNumber'].invalid && (customerForm.controls['BankAccountNumber'].dirty || customerForm.controls['BankAccountNumber'].touched)" 
+      class="text-warning"
+      >
+      <div 
+        *ngIf="customerForm.controls['BankAccountNumber'].errors?.required"
+        >
+        Account number is reuired
+      </div>
+      <div 
+        *ngIf="customerForm.controls['BankAccountNumber'].errors?.invalidAccountNumber"
+        >
+        Account number is invalid
+      </div>
+    </div>
+  </div>
+  <div class="input-container ic1">
+    <input 
+      id="account_number" 
+      class="input" 
+      type="text" 
+      placeholder=" " 
+      formControlName="DateOfBirth" 
+      [(ngModel)]="customer.DateOfBirth"
+      />
+    <div class="cut"></div>
+    <label for="account_number" class="placeholder">
+      Birthdate
+    </label>
+    <div
+      *ngIf="customerForm.controls['DateOfBirth'].invalid && (customerForm.controls['DateOfBirth'].dirty || customerForm.controls['DateOfBirth'].touched)" 
+      class="text-warning"
+      >
+      <div 
+        *ngIf="customerForm.controls['DateOfBirth'].errors?.required"
+        >
+        Birthdate is reuired
+      </div>
+      <div 
+        *ngIf="customerForm.controls['DateOfBirth'].errors?.duplication"
+        >
+        Customer is duplicated
+      </div>
+    </div>
+  </div>
+  <button 
+    [disabled]="customerForm.status == 'INVALID'"
+    type="text" class="submit"
+  >submit</button>
+</div>
