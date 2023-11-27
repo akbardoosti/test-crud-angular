@@ -6,19 +6,15 @@ import { Customer } from '../models/customer.interface';
   providedIn: 'root',
 })
 export class DuplicationValidationService {
-  validateDuplicattion(isEdit: boolean, customer?:Customer): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {        
-     
-        
+  validateDuplication(isEdit: boolean, customer?:Customer): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
       if(!isEdit) {
             const isValid = !!control.value ? !this.isDuplication(control.parent as FormGroup): true;
             return isValid ? null : { duplication: true };
         } else {
           const parent = control.parent as FormGroup;
-          
-          
           if(
-            !!customer 
+            !!customer
             && (
               customer.DateOfBirth != parent?.controls.DateOfBirth.value
               || customer.Firstname != parent?.controls.Firstname.value
@@ -27,8 +23,7 @@ export class DuplicationValidationService {
           ) {
             const isValid = !!control.value ? !this.isDuplication(control.parent as FormGroup): true;
             return isValid ? null : { duplication: true };
-          } 
-          
+          }
           return null;
         }
     };
@@ -39,16 +34,16 @@ export class DuplicationValidationService {
         FormControl
     >;
     const customerListJson = localStorage.getItem('customerList');
-    let customerList: Array<Customer> = []; 
+    let customerList: Array<Customer> = [];
     if (customerListJson) {
         customerList = JSON.parse(customerListJson);
         const find = customerList.find((el:Customer) => {
-            const firstNameFlag = el.Firstname == parent.controls.Firstname.value;
-            const lastNameFlag = el.Lastname == parent.controls.Lastname.value;
-            const dateOfBirthFlag = el.DateOfBirth == parent.controls.DateOfBirth.value;
+            const firstNameFlag = el.Firstname == controls.Firstname.value;
+            const lastNameFlag = el.Lastname == controls.Lastname.value;
+            const dateOfBirthFlag = el.DateOfBirth == controls.DateOfBirth.value;
             if (
                 firstNameFlag
-                && lastNameFlag 
+                && lastNameFlag
                 && dateOfBirthFlag
             ) {
                 return true;
@@ -57,7 +52,7 @@ export class DuplicationValidationService {
         });
         return find ? true : false;
     }
-    
+
     return false;
   }
 }

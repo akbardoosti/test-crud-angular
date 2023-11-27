@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Customer } from './models/customer.interface';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { PhoneValidationService } from './services/phone-validation.service';
-import { EmailValidationService } from './services/emial-validation.service';
-import { AccountNumberValidation } from './services/account-number-validation.service';
-import { DuplicationValidationService } from './services/duplication-validation.service';
+import {Component, OnInit} from '@angular/core';
+import {Customer} from './models/customer.interface';
+import {ValidatedCustomer} from './models/validated-customer.class';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {PhoneValidationService} from './services/phone-validation.service';
+import {EmailValidationService} from './services/emial-validation.service';
+import {AccountNumberValidation} from './services/account-number-validation.service';
+import {DuplicationValidationService} from './services/duplication-validation.service';
 
 @Component({
   selector: 'app-root',
@@ -54,23 +55,23 @@ export class AppComponent implements OnInit {
       ),
       DateOfBirth: new FormControl(
         this.customer.DateOfBirth,
-        [Validators.required, this.duplicationValidatorService.validateDuplicattion(this.editFlag)]
+        [Validators.required, this.duplicationValidatorService.validateDuplication(this.editFlag)]
       ),
       Email: new FormControl(
         this.customer.Email,
         [
-          Validators.required, 
-          this.emailValidator.validatePhoneNumber(),
-          this.emailValidator.vaidateDuplication(false)
+          Validators.required,
+          this.emailValidator.validateEmail(),
+          this.emailValidator.validateDuplication(false)
         ]
       ),
       Firstname: new FormControl(
         this.customer.Firstname,
-        [Validators.required, this.duplicationValidatorService.validateDuplicattion(this.editFlag)]
+        [Validators.required, this.duplicationValidatorService.validateDuplication(this.editFlag)]
       ),
       Lastname: new FormControl(
         this.customer.Lastname,
-        [Validators.required, this.duplicationValidatorService.validateDuplicattion(this.editFlag)]
+        [Validators.required, this.duplicationValidatorService.validateDuplication(this.editFlag)]
       ),
       PhoneNumber: new FormControl(
        
@@ -87,21 +88,21 @@ export class AppComponent implements OnInit {
   changeControllers(isEdit: boolean) {
     this.customerFormControllers.Firstname.setValidators([
       Validators.required,
-      this.duplicationValidatorService.validateDuplicattion(isEdit, this.editedCustomer)
+      this.duplicationValidatorService.validateDuplication(isEdit, this.editedCustomer)
     ]);
     this.customerFormControllers.Lastname.setValidators([
       Validators.required,
-      this.duplicationValidatorService.validateDuplicattion(isEdit, this.editedCustomer)
+      this.duplicationValidatorService.validateDuplication(isEdit, this.editedCustomer)
     ]);
     this.customerFormControllers.DateOfBirth.setValidators([
       Validators.required,
-      this.duplicationValidatorService.validateDuplicattion(isEdit, this.editedCustomer)
+      this.duplicationValidatorService.validateDuplication(isEdit, this.editedCustomer)
     ]);
 
     this.customerFormControllers.Email.setValidators([
       Validators.required,
-      this.emailValidator.validatePhoneNumber(),
-      this.emailValidator.vaidateDuplication(isEdit, this.editedCustomer)
+      this.emailValidator.validateEmail(),
+      this.emailValidator.validateDuplication(isEdit, this.editedCustomer)
     ]);
   }
 
@@ -112,15 +113,15 @@ export class AppComponent implements OnInit {
     }
   }
   submitForm() {
-    console.log(this.editFlag);
-    
-    if(
-      this.editFlag
-      || (
-        !this.duplicationValidatorService.isDuplication(this.customerForm)
-        && this.emailValidator.isUnique(this.customerFormControllers.Email)
-      )
-    ) {
+    try {
+      const validatedCustomer = new ValidatedCustomer(this.customer);
+      if (
+        this.editFlag
+        || (
+          !this.duplicationValidatorService.isDuplication(this.customerForm)
+          && this.emailValidator.isUnique(this.customerFormControllers.Email)
+        )
+      ) {
 
         if (!this.editFlag) {
           const customer = {...this.customer};

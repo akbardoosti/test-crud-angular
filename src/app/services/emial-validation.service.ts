@@ -6,28 +6,28 @@ import { Customer } from '../models/customer.interface';
   providedIn: 'root',
 })
 export class EmailValidationService {
-  validatePhoneNumber(): ValidatorFn {
+  validateEmail(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const emailRegxp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; // Adjust the regex based on your requirements
-      const isValid = 
+      const isValid =
         !!control.value ?emailRegxp.test(control.value):true;
-      
+
       return isValid ? null : { invalidEmail: true };
     };
   }
-  vaidateDuplication(isEdit: boolean, customer?:Customer): ValidatorFn {
+  validateDuplication(isEdit: boolean, customer?:Customer): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-        if( 
-          !isEdit 
+        if(
+          !isEdit
           || (
-            isEdit 
-            && (!!customer 
+            isEdit
+            && (!!customer
             && control.value != customer.Email)
           )
         ) {
-            const isValid = 
+            const isValid =
               !!control.value? this.isUnique(control as FormControl) : true;
-            
+
             return isValid ? null : { duplication: true };
         }
         return null;
@@ -35,10 +35,9 @@ export class EmailValidationService {
   }
   isUnique(control: FormControl): boolean {
     const customerListJson = localStorage.getItem('customerList');
-    let customerList: Array<Customer> = []; 
+    let customerList: Array<Customer> = [];
     if (customerListJson) {
         customerList = JSON.parse(customerListJson);
-        console.log(customerList)
         const find = customerList.find((el:Customer) => {
             const emailFlag = el.Email == control.value;
             if (
@@ -50,7 +49,7 @@ export class EmailValidationService {
         });
         return find ? false : true;
     }
-    
+
     return true;
   }
 }
