@@ -53,6 +53,14 @@ export class AppComponent implements OnInit {
         this.customer.BankAccountNumber,
         [Validators.required, this.accountNumberValidator.validatePhoneNumber()]
       ),
+      Firstname: new FormControl(
+        this.customer.Firstname,
+        [Validators.required, this.duplicationValidatorService.validateDuplication(this.editFlag)]
+      ),
+      Lastname: new FormControl(
+        this.customer.Lastname,
+        [Validators.required, this.duplicationValidatorService.validateDuplication(this.editFlag)]
+      ),
       DateOfBirth: new FormControl(
         this.customer.DateOfBirth,
         [Validators.required, this.duplicationValidatorService.validateDuplication(this.editFlag)]
@@ -64,14 +72,6 @@ export class AppComponent implements OnInit {
           this.emailValidator.validateEmail(),
           this.emailValidator.validateDuplication(false)
         ]
-      ),
-      Firstname: new FormControl(
-        this.customer.Firstname,
-        [Validators.required, this.duplicationValidatorService.validateDuplication(this.editFlag)]
-      ),
-      Lastname: new FormControl(
-        this.customer.Lastname,
-        [Validators.required, this.duplicationValidatorService.validateDuplication(this.editFlag)]
       ),
       PhoneNumber: new FormControl(
         this.customer.PhoneNumber,
@@ -138,14 +138,6 @@ export class AppComponent implements OnInit {
         }
 
         localStorage.setItem('customerList', JSON.stringify(this.customerList));
-        this.customer = {
-          BankAccountNumber: '',
-          DateOfBirth: '',
-          Email: '',
-          Firstname: '',
-          Lastname: '',
-          PhoneNumber: ''
-        };
         this.changeControllers(false);
         this.editFlag = false;
         this.customerForm.reset();
@@ -176,7 +168,6 @@ export class AppComponent implements OnInit {
   editCustomer(customer: Customer) {
     this.changeControllers(true);
     this.editFlag = true;
-    this.customer = {...customer};
     this.editedCustomer = {...customer};
     this.customerForm.setValue(
       customer
