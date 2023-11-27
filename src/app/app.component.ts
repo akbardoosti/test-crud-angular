@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
     keyof Customer,
     FormControl
   >;
-  editedCustomer!: Customer;
+  editedCustomer?: Customer;
   customerForm: FormGroup;
 
   constructor(
@@ -55,22 +55,24 @@ export class AppComponent implements OnInit {
       ),
       Firstname: new FormControl(
         this.customer.Firstname,
-        [Validators.required, this.duplicationValidatorService.validateDuplication(this.editFlag)]
+        [Validators.required,
+        ]
       ),
       Lastname: new FormControl(
         this.customer.Lastname,
-        [Validators.required, this.duplicationValidatorService.validateDuplication(this.editFlag)]
+        [Validators.required,
+        ]
       ),
       DateOfBirth: new FormControl(
         this.customer.DateOfBirth,
-        [Validators.required, this.duplicationValidatorService.validateDuplication(this.editFlag)]
+        [Validators.required,
+        ]
       ),
       Email: new FormControl(
         this.customer.Email,
         [
           Validators.required,
           this.emailValidator.validateEmail(),
-          this.emailValidator.validateDuplication(false)
         ]
       ),
       PhoneNumber: new FormControl(
@@ -87,21 +89,17 @@ export class AppComponent implements OnInit {
   changeControllers(isEdit: boolean) {
     this.customerFormControllers.Firstname.setValidators([
       Validators.required,
-      this.duplicationValidatorService.validateDuplication(isEdit, this.editedCustomer)
     ]);
     this.customerFormControllers.Lastname.setValidators([
       Validators.required,
-      this.duplicationValidatorService.validateDuplication(isEdit, this.editedCustomer)
     ]);
     this.customerFormControllers.DateOfBirth.setValidators([
       Validators.required,
-      this.duplicationValidatorService.validateDuplication(isEdit, this.editedCustomer)
     ]);
 
     this.customerFormControllers.Email.setValidators([
       Validators.required,
       this.emailValidator.validateEmail(),
-      this.emailValidator.validateDuplication(isEdit, this.editedCustomer)
     ]);
   }
 
@@ -115,22 +113,19 @@ export class AppComponent implements OnInit {
   submitForm() {
     try {
       const validatedCustomer = new ValidatedCustomer(this.customer);
-      if (
-        this.editFlag
-        || (
-          !this.duplicationValidatorService.isDuplication(this.customerForm)
-          && this.emailValidator.isUnique(this.customerFormControllers.Email)
-        )
-      ) {
 
+      if (
+        !this.duplicationValidatorService.isDuplication(this.customerForm, this.editedCustomer)
+        && this.emailValidator.isUnique(this.customerFormControllers.Email, this.editedCustomer)
+      ) {
         if (!this.editFlag) {
           const customer = {...this.customer};
           this.customerList.push(customer);
         } else {
           const findIndex = this.customerList.findIndex(
-            el => (el.DateOfBirth == this.editedCustomer.DateOfBirth
-              && el.Firstname == this.editedCustomer.Firstname
-              && el.Lastname == this.editedCustomer.Lastname)
+            el => (el.DateOfBirth == this.editedCustomer?.DateOfBirth
+              && el.Firstname == this.editedCustomer?.Firstname
+              && el.Lastname == this.editedCustomer?.Lastname)
           );
           if (findIndex != -1) {
             this.customerList[findIndex] = {...this.customer};
@@ -140,6 +135,7 @@ export class AppComponent implements OnInit {
         localStorage.setItem('customerList', JSON.stringify(this.customerList));
         this.changeControllers(false);
         this.editFlag = false;
+        this.editedCustomer = undefined;
         this.customerForm.reset();
       } else {
         alert('this customer is duplicated');

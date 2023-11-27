@@ -33,10 +33,16 @@ export class EmailValidationService {
         return null;
       };
   }
-  isUnique(control: FormControl): boolean {
+  isUnique(control: FormControl, customer?:Customer): boolean {
     const customerListJson = localStorage.getItem('customerList');
     let customerList: Array<Customer> = [];
-    if (customerListJson) {
+    if (
+      customerListJson
+      && (
+        !customer
+        || (!!customer && customer.Email != control.value)
+      )
+    ) {
         customerList = JSON.parse(customerListJson);
         const find = customerList.find((el:Customer) => {
             const emailFlag = el.Email == control.value;
@@ -47,7 +53,9 @@ export class EmailValidationService {
             }
             return false;
         });
-        return find ? false : true;
+        if (find) {
+          throw new Error('Email is duplicated');
+        }
     }
 
     return true;
