@@ -39,15 +39,15 @@ export class AppComponent implements OnInit {
   >;
   editedCustomer!: Customer;
   customerForm: FormGroup;
- 
+
   constructor(
-    private formBuilder:FormBuilder,
+    private formBuilder: FormBuilder,
     private phoneValidator: PhoneValidationService,
     private emailValidator: EmailValidationService,
     private accountNumberValidator: AccountNumberValidation,
     private duplicationValidatorService: DuplicationValidationService
   ) {
-    
+
     this.customerFormControllers = {
       BankAccountNumber: new FormControl(
         this.customer.BankAccountNumber,
@@ -74,8 +74,7 @@ export class AppComponent implements OnInit {
         [Validators.required, this.duplicationValidatorService.validateDuplication(this.editFlag)]
       ),
       PhoneNumber: new FormControl(
-       
-        this.customer.PhoneNumber, 
+        this.customer.PhoneNumber,
         [Validators.required, this.phoneValidator.validatePhoneNumber()]
       ),
     };
@@ -84,7 +83,7 @@ export class AppComponent implements OnInit {
       this.customerFormControllers
     );
   }
-  
+
   changeControllers(isEdit: boolean) {
     this.customerFormControllers.Firstname.setValidators([
       Validators.required,
@@ -112,6 +111,7 @@ export class AppComponent implements OnInit {
       this.customerList = JSON.parse(customerListJson);
     }
   }
+
   submitForm() {
     try {
       const validatedCustomer = new ValidatedCustomer(this.customer);
@@ -172,6 +172,7 @@ export class AppComponent implements OnInit {
       localStorage.setItem('customerList', JSON.stringify(this.customerList));
     }
   }
+
   editCustomer(customer: Customer) {
     this.changeControllers(true);
     this.editFlag = true;

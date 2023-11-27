@@ -5,27 +5,26 @@
     <div class="title">Welcome</div>
     <div class="subtitle">Let's create your account!</div>
     <div class="input-container ic1">
-      <input 
-        id="firstname" 
-        class="input" 
-        type="text" 
-        placeholder=" " 
+      <input
+        id="firstname"
+        class="input"
+        type="text"
+        placeholder=" "
         [autocomplete]="'off'"
-        formControlName="Firstname" 
+        formControlName="Firstname"
         [(ngModel)]="customer.Firstname"
         />
-      <!-- <div class="cut"></div> -->
       <label for="firstname" class="placeholder">First name</label>
       <div
-        *ngIf="customerForm.controls['Firstname'].invalid && (customerForm.controls['Firstname'].dirty || customerForm.controls['Firstname'].touched)" 
+        *ngIf="customerForm.controls['Firstname'].invalid && (customerForm.controls['Firstname'].dirty || customerForm.controls['Firstname'].touched)"
         class="text-warning"
         >
-        <div 
+        <div
           *ngIf="customerForm.controls['Firstname'].errors?.required"
           >
           First name is reuired
         </div>
-        <div 
+        <div
           *ngIf="customerForm.controls['Firstname'].errors?.duplication"
           >
           Customer is duplicated
@@ -33,27 +32,26 @@
       </div>
     </div>
     <div class="input-container ic1">
-      <input 
-        id="lastname" 
-        class="input" 
-        type="text" 
-        placeholder=" " 
-        formControlName="Lastname" 
+      <input
+        id="lastname"
+        class="input"
+        type="text"
+        placeholder=" "
+        formControlName="Lastname"
         [(ngModel)]="customer.Lastname"
         [autocomplete]="'off'"
         />
-      <!-- <div class="cut"></div> -->
       <label for="lastname" class="placeholder">Last name</label>
       <div
-        *ngIf="customerForm.controls['Lastname'].invalid && (customerForm.controls['Lastname'].dirty || customerForm.controls['Lastname'].touched)" 
+        *ngIf="customerForm.controls['Lastname'].invalid && (customerForm.controls['Lastname'].dirty || customerForm.controls['Lastname'].touched)"
         class="text-warning"
         >
-        <div 
+        <div
           *ngIf="customerForm.controls['Lastname'].errors?.required"
           >
           Last name is reuired
         </div>
-        <div 
+        <div
           *ngIf="customerForm.controls['Lastname'].errors?.duplication"
           >
           Customer is duplicated
@@ -61,32 +59,31 @@
       </div>
     </div>
     <div class="input-container ic1">
-      <input 
-        id="email" 
-        class="input" 
-        type="email" 
-        placeholder=" " 
-        formControlName="Email" 
+      <input
+        id="email"
+        class="input"
+        type="email"
+        placeholder=" "
+        formControlName="Email"
         [(ngModel)]="customer.Email"
         [autocomplete]="'off'"
         />
-      <!-- <div class="cut"></div> -->
       <label for="email" class="placeholder">Email</label>
       <div
-        *ngIf="customerForm.controls['Email'].invalid && (customerForm.controls['Email'].dirty || customerForm.controls['Email'].touched)" 
+        *ngIf="customerForm.controls['Email'].invalid && (customerForm.controls['Email'].dirty || customerForm.controls['Email'].touched)"
         class="text-warning"
         >
-        <div 
+        <div
           *ngIf="customerForm.controls['Email'].errors?.required"
           >
           Email is reuired
         </div>
-        <div 
+        <div
           *ngIf="customerForm.controls['Email'].errors?.invalidEmail"
           >
           Email is not valid
         </div>
-        <div 
+        <div
         *ngIf="customerForm.controls['Email'].errors?.duplication"
         >
           Email is duplicated
@@ -94,56 +91,54 @@
       </div>
     </div>
     <div class="input-container ic1">
-      <input 
-        id="phone_number" 
-        class="input" 
-        type="text" 
-        placeholder=" " 
-        formControlName="PhoneNumber" 
+      <input
+        id="phone_number"
+        class="input"
+        type="text"
+        placeholder=" "
+        formControlName="PhoneNumber"
         [(ngModel)]="customer.PhoneNumber"
         [autocomplete]="'off'"
         />
-      <!-- <div class="cut"></div> -->
       <label for="phone_number" class="placeholder">Phone number</label>
       <div
-        *ngIf="customerForm.controls['PhoneNumber'].invalid && (customerForm.controls['PhoneNumber'].dirty || customerForm.controls['PhoneNumber'].touched)" 
+        *ngIf="customerForm.controls['PhoneNumber'].invalid && (customerForm.controls['PhoneNumber'].dirty || customerForm.controls['PhoneNumber'].touched)"
         class="text-warning"
         >
-        <div 
+        <div
           *ngIf="customerForm.controls['PhoneNumber'].errors?.required"
           >
           Phone number is reuired
         </div>
-        <div 
+        <div
           *ngIf="customerForm.controls['PhoneNumber'].errors?.invalidPhoneNumber"
           >
           Phone number must start with 09 or +989
         </div>
-        
+
       </div>
     </div>
     <div class="input-container ic1">
-      <input 
-        id="account_number" 
-        class="input" 
-        type="text" 
-        placeholder=" " 
-        formControlName="BankAccountNumber" 
+      <input
+        id="account_number"
+        class="input"
+        type="text"
+        placeholder=" "
+        formControlName="BankAccountNumber"
         [autocomplete]="'off'"
         [(ngModel)]="customer.BankAccountNumber"
         />
-      <!-- <div class="cut"></div> -->
       <label for="account_number" class="placeholder">Bank account number</label>
       <div
-        *ngIf="customerForm.controls['BankAccountNumber'].invalid && (customerForm.controls['BankAccountNumber'].dirty || customerForm.controls['BankAccountNumber'].touched)" 
+        *ngIf="customerForm.controls['BankAccountNumber'].invalid && (customerForm.controls['BankAccountNumber'].dirty || customerForm.controls['BankAccountNumber'].touched)"
         class="text-warning"
         >
-        <div 
+        <div
           *ngIf="customerForm.controls['BankAccountNumber'].errors?.required"
           >
           Account number is reuired
         </div>
-        <div 
+        <div
           *ngIf="customerForm.controls['BankAccountNumber'].errors?.invalidAccountNumber"
           >
           Account number must be at least 9 digits
@@ -160,7 +155,6 @@
         [(ngModel)]="customer.DateOfBirth"
         [autocomplete]="'off'"
         />
-      <!-- <div class="cut"></div> -->
       <label for="date_of_birth" class="placeholder">
         Birthdate
       </label>
