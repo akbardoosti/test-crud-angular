@@ -12,7 +12,7 @@ body {
     flex-direction: column;
     align-items: center;
 }
-  
+
   .form {
     background-color: #15172b;
     border-radius: 20px;
@@ -24,7 +24,7 @@ body {
     flex-flow: row wrap;
     gap: 0.5rem;
   }
-  
+
   .title {
     color: #eee;
     font-family: sans-serif;
@@ -32,7 +32,7 @@ body {
     font-weight: 600;
     margin-top: 30px;
   }
-  
+
   .subtitle {
     color: #eee;
     font-family: sans-serif;
@@ -40,22 +40,22 @@ body {
     font-weight: 600;
     margin-top: 10px;
   }
-  
+
   .input-container {
     height: 50px;
     position: relative;
     width: 100%;
     flex: 1 1 45%;
   }
-  
+
   .ic1 {
     margin-top: 40px;
   }
-  
+
   .ic2 {
     margin-top: 30px;
   }
-  
+
   .input {
     background-color: #303245;
     border-radius: 12px;
@@ -68,7 +68,7 @@ body {
     padding: 4px 20px 0;
     width: 100%;
   }
-  
+
   .cut {
     background-color: #15172b;
     border-radius: 10px;
@@ -80,16 +80,16 @@ body {
     transition: transform 200ms;
     width: 76px;
   }
-  
+
   .cut-short {
     width: 50px;
   }
-  
+
   .input:focus ~ .cut,
   .input:not(:placeholder-shown) ~ .cut {
     transform: translateY(8px);
   }
-  
+
   .placeholder {
     color: #65657b;
     font-family: sans-serif;
@@ -101,20 +101,20 @@ body {
     transition: transform 200ms, color 200ms;
     top: 20px;
   }
-  
+
   .input:focus ~ .placeholder,
   .input:not(:placeholder-shown) ~ .placeholder {
     transform: translateY(-33px) translateX(-12px) scale(0.85);
   }
-  
+
   .input:not(:placeholder-shown) ~ .placeholder {
     color: #808097;
   }
-  
+
   .input:focus ~ .placeholder {
     color: #dc2f55;
   }
-  
+
   .submit {
     background-color: #08d;
     border-radius: 12px;
@@ -128,15 +128,14 @@ body {
     text-align: center;
     width: 100%;
   }
-  
+
   .submit:active {
     background-color: #06b;
   }
-  
+
   .text-warning {
     color: #fff;
   }
-
   button[disabled],
   button[disabled]:focus,
   button[disabled]:active {
@@ -144,65 +143,3 @@ body {
     cursor: not-allowed;
     user-select: none;
   }
-  
-
-
-  .styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
-
-.styled-table thead tr {
-  background-color: #009879;
-  color: #ffffff;
-  text-align: left;
-}
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
-}
-.styled-table tbody tr {
-  border-bottom: 1px solid #dddddd;
-}
-
-.styled-table tbody tr:nth-of-type(even) {
-  background-color: #f3f3f3;
-}
-
-.styled-table tbody tr:last-of-type {
-  border-bottom: 2px solid #009879;
-}
-.styled-table tbody tr.active-row {
-  font-weight: bold;
-  color: #009879;
-}
-
-.buttons-contaienr {
-  display: flex;
-  column-gap: 0.25rem;
-}
-.btn {
-  padding: 0.2rem 0.3rem;
-  transition: background-color 0.5s ease-in-out;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 0.875rem;
-}
-.delete-btn {
-  background-color: #ff0000;
-}
-.delete-btn:hover {
-  background-color: #b40909;
-}
-
-.edit-btn {
-  background-color: #1961e7;
-}
-.edit-btn:hover {
-  background-color: #073385;
-}
