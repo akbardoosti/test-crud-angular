@@ -74,10 +74,10 @@ describe('AppComponent', () => {
   it('should edit a customer when editCustomer is called', () => {
     const customer:Customer= {
       BankAccountNumber: '555555555',
-      DateOfBirth: '1371-05-05',
+      DateOfBirth: '1985-05-05',
       Email: 'ddd@gmail.com',
-      Firstname: '14574',
-      Lastname: '1540',
+      Firstname: 'John',
+      Lastname: 'Doe',
       PhoneNumber: '09196791889'
     };
     component.editCustomer(customer);
