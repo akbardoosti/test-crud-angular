@@ -151,84 +151,45 @@
       </div>
     </div>
     <div class="input-container ic1">
-      <input 
-        id="account_number" 
-        class="input" 
-        type="text" 
-        placeholder=" " 
-        formControlName="DateOfBirth" 
+      <input
+        id="date_of_birth"
+        class="input"
+        type="text"
+        placeholder=" "
+        formControlName="DateOfBirth"
         [(ngModel)]="customer.DateOfBirth"
         [autocomplete]="'off'"
         />
       <!-- <div class="cut"></div> -->
-      <label for="account_number" class="placeholder">
+      <label for="date_of_birth" class="placeholder">
         Birthdate
       </label>
       <div
-        *ngIf="customerForm.controls['DateOfBirth'].invalid && (customerForm.controls['DateOfBirth'].dirty || customerForm.controls['DateOfBirth'].touched)" 
+        *ngIf="customerForm.controls['DateOfBirth'].invalid && (customerForm.controls['DateOfBirth'].dirty || customerForm.controls['DateOfBirth'].touched)"
         class="text-warning"
         >
-        <div 
+        <div
           *ngIf="customerForm.controls['DateOfBirth'].errors?.required"
           >
           Birthdate is reuired
         </div>
-        <div 
+        <div
           *ngIf="customerForm.controls['DateOfBirth'].errors?.duplication"
           >
           Customer is duplicated
         </div>
       </div>
     </div>
-    <button 
+    <button
       [disabled]="customerForm.status == 'INVALID'"
       type="text" class="submit"
     >Submit</button>
   </form>
-  
-
-
-  <table 
-    class="styled-table"
+  <app-customer-list
     *ngIf="customerList.length > 0"
-    >
-    <thead>
-        <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Birthdate</th>
-            <th>Phone number</th>
-            <th>Email</th>
-            <th>Bank account number</th>
-            <th>Operation</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let cs of customerList">
-          <td>{{cs.Firstname}}</td>
-          <td>{{cs.Lastname}}</td>
-          <td>{{cs.DateOfBirth}}</td>
-          <td>{{cs.PhoneNumber}}</td>
-          <td>{{cs.Email}}</td>
-          <td>{{cs.BankAccountNumber}}</td>
-          <td>
-            <div class="buttons-contaienr">
-              <button 
-                (click)="deleteCustomer(cs) "
-                class="btn delete-btn">
-                Delete
-              </button>
-              <button 
-                (click)="editCustomer(cs)"
-                class="btn edit-btn">
-                Edit
-              </button>
-            </div>
-          </td>
-        </tr>
-        
-        <!-- and so on... -->
-    </tbody>
-  </table>
+    [customerList]="customerList"
+    (onEdit)="editCustomer($event)"
+    (onDelete)="deleteCustomer($event)"
+  ></app-customer-list>
 </div>
 

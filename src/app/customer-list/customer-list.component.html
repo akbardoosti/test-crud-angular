@@ -1,0 +1,43 @@
+<table
+    class="styled-table"
+>
+<thead>
+    <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Birthdate</th>
+        <th>Phone number</th>
+        <th>Email</th>
+        <th>Bank account number</th>
+        <th>Operation</th>
+    </tr>
+</thead>
+<tbody>
+    <tr *ngFor="let cs of customerList"
+      class="customer-item"
+    >
+      <td>{{cs.Firstname}}</td>
+      <td>{{cs.Lastname}}</td>
+      <td>{{cs.DateOfBirth}}</td>
+      <td>{{cs.PhoneNumber}}</td>
+      <td>{{cs.Email}}</td>
+      <td>{{cs.BankAccountNumber}}</td>
+      <td>
+        <div class="buttons-contaienr">
+          <button
+            (click)="deleteCustomer(cs) "
+            class="btn delete-btn">
+            Delete
+          </button>
+          <button
+            (click)="editCustomer(cs)"
+            class="btn edit-btn">
+            Edit
+          </button>
+        </div>
+      </td>
+    </tr>
+
+    <!-- and so on... -->
+</tbody>
+</table>

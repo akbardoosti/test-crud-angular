@@ -11,7 +11,11 @@ import { DuplicationValidationService } from './services/duplication-validation.
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   providers: [
-    EmailValidationService
+    FormBuilder,
+    PhoneValidationService,
+    EmailValidationService,
+    AccountNumberValidation,
+    DuplicationValidationService
   ]
 })
 export class AppComponent implements OnInit {
@@ -118,38 +122,41 @@ export class AppComponent implements OnInit {
       )
     ) {
 
-      if (!this.editFlag) {
-        const customer = {...this.customer};
-        this.customerList.push(customer);
-      } else {
-        const findIndex = this.customerList.findIndex(
-          el => (el.DateOfBirth == this.editedCustomer.DateOfBirth 
-          && el.Firstname == this.editedCustomer.Firstname
-          && el.Lastname == this.editedCustomer.Lastname)
-        );
-        if (findIndex != -1) {
-          this.customerList[findIndex] = {...this.customer};
+        if (!this.editFlag) {
+          const customer = {...this.customer};
+          this.customerList.push(customer);
+        } else {
+          const findIndex = this.customerList.findIndex(
+            el => (el.DateOfBirth == this.editedCustomer.DateOfBirth
+              && el.Firstname == this.editedCustomer.Firstname
+              && el.Lastname == this.editedCustomer.Lastname)
+          );
+          if (findIndex != -1) {
+            this.customerList[findIndex] = {...this.customer};
+          }
         }
+
+        localStorage.setItem('customerList', JSON.stringify(this.customerList));
+        this.customer = {
+          BankAccountNumber: '',
+          DateOfBirth: '',
+          Email: '',
+          Firstname: '',
+          Lastname: '',
+          PhoneNumber: ''
+        };
+        this.changeControllers(false);
+        this.editFlag = false;
+        this.customerForm.reset();
+      } else {
+        alert('this customer is duplicated');
       }
-      
-      localStorage.setItem('customerList', JSON.stringify(this.customerList));
-      this.customer = {
-        BankAccountNumber: '',
-        DateOfBirth: '',
-        Email: '',
-        Firstname: '',
-        Lastname: '',
-        PhoneNumber: ''
-      };
-      this.changeControllers(false);
-      this.editFlag = false;
-      this.customerForm.reset();
-    } else {
-      alert('this customer is duplicated');
+    } catch (error: any) {
+      alert(error.message);
     }
   }
 
-  deleteCustomer (customer: Customer) {
+  deleteCustomer(customer: Customer) {
     if (confirm("Are you sure?") == true) {
       this.customerList = this.customerList.filter(item => {
         const firstNameFlag = item.Firstname == customer.Firstname;
@@ -165,11 +172,12 @@ export class AppComponent implements OnInit {
     }
   }
   editCustomer(customer: Customer) {
+    this.changeControllers(true);
     this.editFlag = true;
     this.customer = {...customer};
     this.editedCustomer = {...customer};
-    // console.log(this.editedCustomer);
-    
-    this.changeControllers(true);
+    this.customerForm.setValue(
+      customer
+    );
   }
 }
